@@ -19,7 +19,7 @@
         </table>
     </form>
 
-    <form id="sudoku-form">
+    <form id="sudoku-form" method="POST" action="/solve">
         <table>
             <!-- 9x9 plansza Sudoku -->
 
@@ -143,7 +143,18 @@
             <button type="submit">Rozwiąż Sudoku</button>
         </div>
     </form>
-
+    {% if sudoku %}
+    <h2>Odebrane dane Sudoku:</h2>
+    <table>
+        {% for row in sudoku %}
+            <tr>
+                {% for cell in row %}
+                    <td>{{ cell }}</td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
     <div class="button-container">
         <!-- Formularz do przesyłania obrazu -->
         <form enctype="multipart/form-data" id="image-upload-form">
@@ -152,7 +163,10 @@
         </form>
     </div>
 
-    <script>
+
+
+
+    <!-- <script>
         // Przykładowa obsługa formularzy w JavaScript
         document.getElementById("sudoku-form").addEventListener("submit", function(e) {
             e.preventDefault();
@@ -175,7 +189,9 @@
             // Wysyłanie obrazu na serwer (np. używając fetch API do backendu)
             console.log("Załadowano obrazek:", formData.get("sudoku-image"));
         });
-    </script>
+    </script> -->
+
+
 
 </body>
 </html>
