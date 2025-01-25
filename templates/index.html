@@ -3,14 +3,179 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Get Weather Conditions</title>
-    <link href="{{ url_for('static', filename='styles/style.css')}}" rel="stylesheet"/>
+    <title>Sudoku Solver</title>
+    <link href="{{ url_for('static', filename='styles/index.css')}}" rel="stylesheet"/>
 </head>
 <body>
-    <h1>Get Weather Conditions</h1>
-    <form action="/weather">
-        <input type="text" name="city" id ="city" placeholder="Enter a City" />
-        <button type="submit">Submit</button>
+    <h1>Solve Your Sudoku</h1>
+    <form action="">
+        <table>
+            <caption>Sudoku</caption>
+            <tr>
+                <th>1 col</th>
+                <th>2 col</th>
+                <th>3 col</th>
+            </tr>
+        </table>
     </form>
+
+    <form id="sudoku-form">
+        <table>
+            <!-- 9x9 plansza Sudoku -->
+
+             <!-- 1-st row -->
+            <tr>
+                <td><input type="text" min="1" max="9" name="cell-0-0"></td>
+                <td><input type="number" min="1" max="9" name="cell-0-1"></td>
+                <td><input type="number" min="1" max="9" name="cell-0-2"></td>
+                <td><input type="number" min="1" max="9" name="cell-0-3"></td>
+                <td><input type="number" min="1" max="9" name="cell-0-4"></td>
+                <td><input type="number" min="1" max="9" name="cell-0-5"></td>
+                <td><input type="number" min="1" max="9" name="cell-0-6"></td>
+                <td><input type="number" min="1" max="9" name="cell-0-7"></td>
+                <td><input type="number" min="1" max="9" name="cell-0-8"></td>
+            </tr>
+            <!-- 2-nd row -->
+            <tr>
+                <td><input type="number" min="1" max="9" name="cell-1-0"></td>
+                <td><input type="number" min="1" max="9" name="cell-1-1"></td>
+                <td><input type="number" min="1" max="9" name="cell-1-2"></td>
+                <td><input type="number" min="1" max="9" name="cell-1-3"></td>
+                <td><input type="number" min="1" max="9" name="cell-1-4"></td>
+                <td><input type="number" min="1" max="9" name="cell-1-5"></td>
+                <td><input type="number" min="1" max="9" name="cell-1-6"></td>
+                <td><input type="number" min="1" max="9" name="cell-1-7"></td>
+                <td><input type="number" min="1" max="9" name="cell-1-8"></td>
+            </tr>
+
+            <!-- 3-rd row -->
+            <tr>
+                <td><input type="number" min="1" max="9" name="cell-2-0"></td>
+                <td><input type="number" min="1" max="9" name="cell-2-1"></td>
+                <td><input type="number" min="1" max="9" name="cell-2-2"></td>
+                <td><input type="number" min="1" max="9" name="cell-2-3"></td>
+                <td><input type="number" min="1" max="9" name="cell-2-4"></td>
+                <td><input type="number" min="1" max="9" name="cell-2-5"></td>
+                <td><input type="number" min="1" max="9" name="cell-2-6"></td>
+                <td><input type="number" min="1" max="9" name="cell-2-7"></td>
+                <td><input type="number" min="1" max="9" name="cell-2-8"></td>
+            </tr>
+            <!-- 4-th row -->
+
+            <tr>
+                <td><input type="number" min="1" max="9" name="cell-3-0"></td>
+                <td><input type="number" min="1" max="9" name="cell-3-1"></td>
+                <td><input type="number" min="1" max="9" name="cell-3-2"></td>
+                <td><input type="number" min="1" max="9" name="cell-3-3"></td>
+                <td><input type="number" min="1" max="9" name="cell-3-4"></td>
+                <td><input type="number" min="1" max="9" name="cell-3-5"></td>
+                <td><input type="number" min="1" max="9" name="cell-3-6"></td>
+                <td><input type="number" min="1" max="9" name="cell-3-7"></td>
+                <td><input type="number" min="1" max="9" name="cell-3-8"></td>
+            </tr>
+
+            <!-- 5-th row -->
+            <tr>
+                <td><input type="number" min="1" max="9" name="cell-4-0"></td>
+                <td><input type="number" min="1" max="9" name="cell-4-1"></td>
+                <td><input type="number" min="1" max="9" name="cell-4-2"></td>
+                <td><input type="number" min="1" max="9" name="cell-4-3"></td>
+                <td><input type="number" min="1" max="9" name="cell-4-4"></td>
+                <td><input type="number" min="1" max="9" name="cell-4-5"></td>
+                <td><input type="number" min="1" max="9" name="cell-4-6"></td>
+                <td><input type="number" min="1" max="9" name="cell-4-7"></td>
+                <td><input type="number" min="1" max="9" name="cell-4-8"></td>
+            </tr>
+
+            <!-- 6-th row -->
+            <tr>
+                <td><input type="number" min="1" max="9" name="cell-5-0"></td>
+                <td><input type="number" min="1" max="9" name="cell-5-1"></td>
+                <td><input type="number" min="1" max="9" name="cell-5-2"></td>
+                <td><input type="number" min="1" max="9" name="cell-5-3"></td>
+                <td><input type="number" min="1" max="9" name="cell-5-4"></td>
+                <td><input type="number" min="1" max="9" name="cell-5-5"></td>
+                <td><input type="number" min="1" max="9" name="cell-5-6"></td>
+                <td><input type="number" min="1" max="9" name="cell-5-7"></td>
+                <td><input type="number" min="1" max="9" name="cell-5-8"></td>
+            </tr>
+
+            <!-- 7-th row -->
+            <tr>
+                <td><input type="number" min="1" max="9" name="cell-6-0"></td>
+                <td><input type="number" min="1" max="9" name="cell-6-1"></td>
+                <td><input type="number" min="1" max="9" name="cell-6-2"></td>
+                <td><input type="number" min="1" max="9" name="cell-6-3"></td>
+                <td><input type="number" min="1" max="9" name="cell-6-4"></td>
+                <td><input type="number" min="1" max="9" name="cell-6-5"></td>
+                <td><input type="number" min="1" max="9" name="cell-6-6"></td>
+                <td><input type="number" min="1" max="9" name="cell-6-7"></td>
+                <td><input type="number" min="1" max="9" name="cell-6-8"></td>
+            </tr>
+
+            <!-- 8-th row -->
+            <tr>
+                <td><input type="number" min="1" max="9" name="cell-7-0"></td>
+                <td><input type="number" min="1" max="9" name="cell-7-1"></td>
+                <td><input type="number" min="1" max="9" name="cell-7-2"></td>
+                <td><input type="number" min="1" max="9" name="cell-7-3"></td>
+                <td><input type="number" min="1" max="9" name="cell-7-4"></td>
+                <td><input type="number" min="1" max="9" name="cell-7-5"></td>
+                <td><input type="number" min="1" max="9" name="cell-7-6"></td>
+                <td><input type="number" min="1" max="9" name="cell-7-7"></td>
+                <td><input type="number" min="1" max="9" name="cell-7-8"></td>
+            </tr>
+
+            <!-- 9-th row -->
+            <tr>
+                <td><input type="number" min="1" max="9" name="cell-9-0"></td>
+                <td><input type="number" min="1" max="9" name="cell-9-1"></td>
+                <td><input type="number" min="1" max="9" name="cell-9-2"></td>
+                <td><input type="number" min="1" max="9" name="cell-9-3"></td>
+                <td><input type="number" min="1" max="9" name="cell-9-4"></td>
+                <td><input type="number" min="1" max="9" name="cell-9-5"></td>
+                <td><input type="number" min="1" max="9" name="cell-9-6"></td>
+                <td><input type="number" min="1" max="9" name="cell-9-7"></td>
+                <td><input type="number" min="1" max="9" name="cell-9-8"></td>
+            </tr>
+        </table>
+        <div class="button-container">
+            <button type="submit">Rozwiąż Sudoku</button>
+        </div>
+    </form>
+
+    <div class="button-container">
+        <!-- Formularz do przesyłania obrazu -->
+        <form enctype="multipart/form-data" id="image-upload-form">
+            <input type="file" name="sudoku-image" accept="image/*">
+            <button type="submit">Załaduj obrazek Sudoku</button>
+        </form>
+    </div>
+
+    <script>
+        // Przykładowa obsługa formularzy w JavaScript
+        document.getElementById("sudoku-form").addEventListener("submit", function(e) {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            let sudokuArray = [];
+            for (let i = 0; i < 9; i++) {
+                let row = [];
+                for (let j = 0; j < 9; j++) {
+                    row.push(parseInt(formData.get(`cell-${i}-${j}`)) || 0); // 0 for empty fields
+                }
+                sudokuArray.push(row);
+            }
+            console.log(sudokuArray);  // Possible send data to backend
+        });
+
+        // Obsługa przesyłania obrazu do backendu (na później)
+        document.getElementById("image-upload-form").addEventListener("submit", function(e) {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            // Wysyłanie obrazu na serwer (np. używając fetch API do backendu)
+            console.log("Załadowano obrazek:", formData.get("sudoku-image"));
+        });
+    </script>
+
 </body>
 </html>

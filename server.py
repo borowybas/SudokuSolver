@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
 from weather import get_current_weather
 from waitress import serve
+import werkzeug.serving
 
 app = Flask(__name__)
 
@@ -22,7 +23,7 @@ def get_weather():
     #     return render_template('city-not-found.html')
 
     weather_data = get_current_weather(city)
-    
+
     return render_template(
         "weather.html",
         title=weather_data["name"],
@@ -31,5 +32,11 @@ def get_weather():
         feels_like=f"{weather_data['main']['feels_like']:.1f}"
     )
 
+# @werkzeug.serving.run_with_reloader
+# def run_server():
+#     app.debug = True    #change when deploy??
+#     serve(app, host="0.0.0.0", port=8000)
+
 if __name__ == "__main__":
+    # run_server()
     serve(app, host="0.0.0.0", port=8000)
