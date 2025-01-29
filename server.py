@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request
+from sudoku import solveSudoku
 from weather import get_current_weather
 from waitress import serve
+
 # import werkzeug.serving
 # import logging
 
@@ -24,17 +26,33 @@ def solve():
             row.append(int(cell_value) if cell_value else 0) #if empty - make 0
         sudoku_data.append(row)
 
+    
+    if solveSudoku(sudoku_data):
+        return render_template('index.html', sudoku=sudoku_data, solved=True)
+    else:
+        return render_template('index.html', error="This sudoku cannot be solved", sudoku=sudoku_data)
+
+    # except Exception as e:
+    #     # Zaloguj błąd (możesz użyć logging zamiast print)
+    #     print(f"Wystąpił błąd: {e}")
+    #     return render_template('index.html', error="Wystąpił błąd podczas rozwiązywania sudoku.")
+
+    
+
+    
+
     # Wypisanie danych Sudoku w konsoli
     # print('fjsdjajd')
     # logging.debug("Dane Sudoku z formularza:")
     # for row in sudoku_data:
     #     logging.debug(row)  # Wypisujemy każdą linię (wiersz) Sudoku
 
-    return render_template('index.html', sudoku=sudoku_data)
+    # return render_template('index.html', sudoku=sudoku_data)
 
 
 if __name__ == "__main__":
     serve(app, host="0.0.0.0", port=8000)
+    
 # @app.route('/weather')
 # def get_weather():
 #     city = request.args.get('city')

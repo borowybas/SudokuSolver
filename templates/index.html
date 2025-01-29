@@ -143,8 +143,9 @@
             <button type="submit">Rozwiąż Sudoku</button>
         </div>
     </form>
+
     {% if sudoku %}
-    <h2>Odebrane dane Sudoku:</h2>
+    <h2>Rozwiązane Sudoku:</h2>
     <table>
         {% for row in sudoku %}
             <tr>
@@ -155,6 +156,11 @@
         {% endfor %}
     </table>
     {% endif %}
+<!-- 
+    {% if error %}
+    <p style="color: red;">{{error}}</p>
+    {% endif %} -->
+
     <div class="button-container">
         <!-- Formularz do przesyłania obrazu -->
         <form enctype="multipart/form-data" id="image-upload-form">
