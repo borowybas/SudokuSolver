@@ -156,47 +156,18 @@
         {% endfor %}
     </table>
     {% endif %}
-<!-- 
+
     {% if error %}
-    <p style="color: red;">{{error}}</p>
-    {% endif %} -->
+        <p style="color: red;">{{error}}</p>
+    {% endif %}
 
     <div class="button-container">
         <!-- Formularz do przesyłania obrazu -->
-        <form enctype="multipart/form-data" id="image-upload-form">
-            <input type="file" name="sudoku-image" accept="image/*">
+        <form enctype="multipart/form-data" id="sudoku-form" method="POST" action="/solve">
+            <input type="file" name="sudoku_image" accept="image/*" required>
             <button type="submit">Załaduj obrazek Sudoku</button>
         </form>
     </div>
-
-
-
-
-    <!-- <script>
-        // Przykładowa obsługa formularzy w JavaScript
-        document.getElementById("sudoku-form").addEventListener("submit", function(e) {
-            e.preventDefault();
-            const formData = new FormData(e.target);
-            let sudokuArray = [];
-            for (let i = 0; i < 9; i++) {
-                let row = [];
-                for (let j = 0; j < 9; j++) {
-                    row.push(parseInt(formData.get(`cell-${i}-${j}`)) || 0); // 0 for empty fields
-                }
-                sudokuArray.push(row);
-            }
-            console.log(sudokuArray);  // Possible send data to backend
-        });
-
-        // Obsługa przesyłania obrazu do backendu (na później)
-        document.getElementById("image-upload-form").addEventListener("submit", function(e) {
-            e.preventDefault();
-            const formData = new FormData(e.target);
-            // Wysyłanie obrazu na serwer (np. używając fetch API do backendu)
-            console.log("Załadowano obrazek:", formData.get("sudoku-image"));
-        });
-    </script> -->
-
 
 
 </body>

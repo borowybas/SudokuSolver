@@ -1,7 +1,10 @@
 from flask import Flask, render_template, request
 from sudoku import solveSudoku
+from sudokuLoad import process_image
 from weather import get_current_weather
 from waitress import serve
+import os
+from PIL import Image
 
 # import werkzeug.serving
 # import logging
@@ -9,6 +12,7 @@ from waitress import serve
 # logging.basicConfig(level=logging.DEBUG)
 
 app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = ''
 
 @app.route('/')
 @app.route('/index')
@@ -17,25 +21,50 @@ def index():
 
 @app.route('/solve', methods=['POST'])
 def solve():
-    sudoku_data = []
+    try:
+        if 'sudoku_image' in request.files:
+            # File uploaded
+            file = request.files['sudoku_image']
+            file_image = Image.open(file)
+            file_image.show()
+            if file.filename == '':
+                return render_template('index.html', error='Nie wybrano pliku')
+            # Save file on server
+            file_path = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
+            file.save(file_path)
 
-    for i in range(9):
-        row = []
-        for j in range(9):
-            cell_value = request.form.get(f'cell-{i}-{j}') #get cell value from form data
-            row.append(int(cell_value) if cell_value else 0) #if empty - make 0
-        sudoku_data.append(row)
+            sudoku_data=process_image(file_path)
+            print(sudoku_data)
 
-    
-    if solveSudoku(sudoku_data):
-        return render_template('index.html', sudoku=sudoku_data, solved=True)
-    else:
-        return render_template('index.html', error="This sudoku cannot be solved", sudoku=sudoku_data)
+            # SOlove
+            # if solveSudoku(sudoku_data):
+            #     return render_template('index.html', sudoku=sudoku_data, solved=True)
+            # else:
+            #     return render_template('index.html', error="This sudoku cannot be solved", sudoku=sudoku_data)
 
-    # except Exception as e:
-    #     # Zaloguj błąd (możesz użyć logging zamiast print)
-    #     print(f"Wystąpił błąd: {e}")
-    #     return render_template('index.html', error="Wystąpił błąd podczas rozwiązywania sudoku.")
+        else:
+            # Text data formular
+
+            sudoku_data = []
+
+            for i in range(9):
+                row = []
+                for j in range(9):
+                    cell_value = request.form.get(f'cell-{i}-{j}') #get cell value from form data
+                    row.append(int(cell_value) if cell_value else 0) #if empty - make 0
+                sudoku_data.append(row)
+
+            
+            if solveSudoku(sudoku_data):
+                return render_template('index.html', sudoku=sudoku_data, solved=True)
+            else:
+                return render_template('index.html', error="This sudoku cannot be solved", sudoku=sudoku_data)
+                
+
+    except Exception as e:
+        # Zaloguj błąd (możesz użyć logging zamiast print)
+        print(f"Wystąpił błąd: {e}")
+        return render_template('index.html', error="Wystąpił błąd podczas rozwiązywania sudoku.")
 
     
 
