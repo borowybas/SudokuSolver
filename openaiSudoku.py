@@ -13,10 +13,7 @@ goo_api="AIzaSyD-NJoZ-c9RVwzKyO-A85I02hgmucUTY0E"
 #         return base64.b64encode(image_file.read()).decode("utf-8")
 
 
-# Path to your image
 def loadSudokuDataFromFile(img_path):
-
-    # image_path = "Sudoku.png"
 
     image = PIL.Image.open(img_path)
 

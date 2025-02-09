@@ -4,8 +4,9 @@ from sudoku import solveSudoku
 # from sudokuLoad import process_image
 # from weather import get_current_weather
 from waitress import serve
-import json
-# import os
+# import json
+import os
+from werkzeug.utils import secure_filename
 # from PIL import Image
 
 # import werkzeug.serving
@@ -14,7 +15,7 @@ import json
 # logging.basicConfig(level=logging.DEBUG)
 
 app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = ''
+app.config['UPLOAD_FOLDER'] = os.path.join('static', 'uploads')
 
 @app.route('/')
 @app.route('/index')
@@ -27,6 +28,18 @@ def solve():
         if 'sudoku_image' in request.files:
             # File uploaded
             file = request.files['sudoku_image']
+
+            if file.filename == '':
+                return render_template('index.html', error='Nie wybrano pliku')
+            
+            filename = secure_filename(file.filename)
+
+            
+            file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            file.save(file_path)
+
+            img = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+
             # file_image = Image.open(file)
             # file_image.show()
             # if file.filename == '':
@@ -45,9 +58,9 @@ def solve():
             print(matrix)
             # SOlove
             if solveSudoku(matrix):
-                return render_template('index.html', sudoku=matrix, solved=True)
+                return render_template('index.html', sudoku=matrix, solved=True, image_url=img)
             else:
-                return render_template('index.html', error="This sudoku cannot be solved", sudoku=matrix)
+                return render_template('index.html', error="This sudoku cannot be solved", sudoku=matrix, image_url=img)
 
         else:
             
@@ -76,18 +89,10 @@ def solve():
 
     
 
-    
-
-    # Wypisanie danych Sudoku w konsoli
-    # print('fjsdjajd')
-    # logging.debug("Dane Sudoku z formularza:")
-    # for row in sudoku_data:
-    #     logging.debug(row)  # Wypisujemy każdą linię (wiersz) Sudoku
-
-    # return render_template('index.html', sudoku=sudoku_data)
 
 
 if __name__ == "__main__":
+    os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
     serve(app, host="0.0.0.0", port=8000)
     
 # @app.route('/weather')

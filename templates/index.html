@@ -165,9 +165,16 @@
         <!-- Formularz do przesyłania obrazu -->
         <form enctype="multipart/form-data" id="sudoku-form" method="POST" action="/solve">
             <input type="file" name="sudoku_image" accept="image/*" required>
-            <button type="submit">Załaduj obrazek Sudoku</button>
+            <button type="submit">Rozwiąż obrazek Sudoku</button>
         </form>
     </div>
+
+    {% if image_url %}
+        <h2>Załadowany obrazek</h2>
+        <img src="{{ image_url }}" alt="Sudoku image" style="max-width: 100%; height: auto;">
+        {% else %}
+        <h1>Image will be render here...</h1>
+    {% endif %}
 
 
 </body>
