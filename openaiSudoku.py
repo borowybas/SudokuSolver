@@ -14,11 +14,11 @@ goo_api="AIzaSyD-NJoZ-c9RVwzKyO-A85I02hgmucUTY0E"
 
 
 # Path to your image
-def loadSudokuDataFromFile():
+def loadSudokuDataFromFile(img_path):
 
     # image_path = "Sudoku.png"
 
-    image = PIL.Image.open('Sudoku.png')
+    image = PIL.Image.open(img_path)
 
     client = genai.Client(api_key=goo_api)
     response = client.models.generate_content(

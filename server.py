@@ -26,7 +26,7 @@ def solve():
     try:
         if 'sudoku_image' in request.files:
             # File uploaded
-            # file = request.files['sudoku_image']
+            file = request.files['sudoku_image']
             # file_image = Image.open(file)
             # file_image.show()
             # if file.filename == '':
@@ -38,7 +38,7 @@ def solve():
             # sudoku_data=process_image(file_path)
             # print(sudoku_data)
 
-            sudoku_data=loadSudokuDataFromFile()
+            sudoku_data=loadSudokuDataFromFile(file)
 
             matrix = eval(sudoku_data)
             
