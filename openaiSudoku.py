@@ -1,13 +1,11 @@
+from google import genai
+from google.genai import types
+
+# import requests
+import PIL.Image 
 # import base64
-# from openai import OpenAI
+goo_api="AIzaSyD-NJoZ-c9RVwzKyO-A85I02hgmucUTY0E"
 
-
-goo_api=""
-
-
-# import anthropic
-# import base64
-# import httpx
 
 # Function to encode the image
 # def encode_image(image_path):
@@ -16,28 +14,22 @@ goo_api=""
 
 
 # Path to your image
-image_path = "Sudoku.png"
+def loadSudokuDataFromFile():
 
-# Getting the Base64 string
-# base64_image = encode_image(image_path)
+    # image_path = "Sudoku.png"
 
-from google import genai
-from google.genai import types
+    image = PIL.Image.open('Sudoku.png')
 
-# import requests
-import PIL.Image
+    client = genai.Client(api_key=goo_api)
+    response = client.models.generate_content(
+        model="gemini-2.0-flash",
+        contents=[
+            "This image is an unsolved sudoku grid. Give me just an array in format [[0, 0, 0, 0, 0, 0, 0, 0, 0],[0, 0, 0, 0, 0, 0, 0, 0, 0],[0, 0, 0, 0, 0, 0, 0, 0, 0],[0, 0, 0, 0, 0, 0, 0, 0, 0],[0, 0, 0, 0, 0, 0, 0, 0, 0],[0, 0, 0, 0, 0, 0, 0, 0, 0],[0, 0, 0, 0, 0, 0, 0, 0, 0],[0, 0, 0, 0, 0, 0, 0, 0, 0],[0, 0, 0, 0, 0, 0, 0, 0, 0]] of the digidts in this sudoku grid, when threre is no digit place 0. Please respond just with [][], no additional words.",
+            image
+        ]
+    )
 
-# image_path = "https://goo.gle/instrument-img"
-# image = requests.get(image_path)
-image = PIL.Image.open('Sudoku.png')
-
-client = genai.Client(api_key=goo_api)
-response = client.models.generate_content(
-    model="gemini-2.0-flash",
-    contents=["This image is an unsolved sudoku grid. Give me just an array in format [[0, 0, 0, 0, 0, 0, 0, 0, 0],[0, 0, 0, 0, 0, 0, 0, 0, 0],[0, 0, 0, 0, 0, 0, 0, 0, 0],[0, 0, 0, 0, 0, 0, 0, 0, 0],[0, 0, 0, 0, 0, 0, 0, 0, 0],[0, 0, 0, 0, 0, 0, 0, 0, 0],[0, 0, 0, 0, 0, 0, 0, 0, 0],[0, 0, 0, 0, 0, 0, 0, 0, 0],[0, 0, 0, 0, 0, 0, 0, 0, 0]] of the digidts in this sudoku grid, when threre is no digit place 0. Please respond just with [][], no additional words.",
-              image])
-
-print(response.text)
+    return response.text
 
 
 # # image1_url = "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg"

@@ -1,10 +1,12 @@
 from flask import Flask, render_template, request
+from openaiSudoku import loadSudokuDataFromFile
 from sudoku import solveSudoku
-from sudokuLoad import process_image
-from weather import get_current_weather
+# from sudokuLoad import process_image
+# from weather import get_current_weather
 from waitress import serve
-import os
-from PIL import Image
+import json
+# import os
+# from PIL import Image
 
 # import werkzeug.serving
 # import logging
@@ -24,25 +26,31 @@ def solve():
     try:
         if 'sudoku_image' in request.files:
             # File uploaded
-            file = request.files['sudoku_image']
-            file_image = Image.open(file)
-            file_image.show()
-            if file.filename == '':
-                return render_template('index.html', error='Nie wybrano pliku')
+            # file = request.files['sudoku_image']
+            # file_image = Image.open(file)
+            # file_image.show()
+            # if file.filename == '':
+            #     return render_template('index.html', error='Nie wybrano pliku')
             # Save file on server
-            file_path = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
-            file.save(file_path)
+            # file_path = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
+            # file.save(file_path)
 
-            sudoku_data=process_image(file_path)
-            print(sudoku_data)
+            # sudoku_data=process_image(file_path)
+            # print(sudoku_data)
 
+            sudoku_data=loadSudokuDataFromFile()
+
+            matrix = eval(sudoku_data)
+            
+            print(matrix)
             # SOlove
-            # if solveSudoku(sudoku_data):
-            #     return render_template('index.html', sudoku=sudoku_data, solved=True)
-            # else:
-            #     return render_template('index.html', error="This sudoku cannot be solved", sudoku=sudoku_data)
+            if solveSudoku(matrix):
+                return render_template('index.html', sudoku=matrix, solved=True)
+            else:
+                return render_template('index.html', error="This sudoku cannot be solved", sudoku=matrix)
 
         else:
+            
             # Text data formular
 
             sudoku_data = []
