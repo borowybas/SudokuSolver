@@ -8,7 +8,7 @@
 </head>
 <body>
     <h1>Solve Your Sudoku</h1>
-    
+
     {% if username %}
     <p>Witaj, {{username}}<a href="{{ url_for('logout') }}"> Wyloguj się </a></p>
     <p><a href="{{ url_for('history') }}"> Historia rozwiązań </a></p>
