@@ -2,3 +2,4 @@
 .env
 __pycache__
 environment.py
+sudoku.db

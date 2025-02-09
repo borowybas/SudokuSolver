@@ -8,6 +8,14 @@
 </head>
 <body>
     <h1>Solve Your Sudoku</h1>
+    
+    {% if username %}
+    <p>Witaj, {{username}}<a href="{{ url_for('logout') }}"> Wyloguj się </a></p>
+    <p><a href="{{ url_for('history') }}"> Historia rozwiązań </a></p>
+    {% else %}
+    <p><a href="{{ url_for('login') }}"> Zaloguj się </a> | <a href="{{ url_for('register') }}"> Zarejestruj się </a></p>
+    {% endif %}
+
     <form action="">
         <table>
             <caption>Sudoku</caption>
