@@ -1,10 +1,11 @@
 from google import genai
 from google.genai import types
+from environment import google_ai_studio_api
 
 # import requests
 import PIL.Image 
 # import base64
-goo_api="AIzaSyD-NJoZ-c9RVwzKyO-A85I02hgmucUTY0E"
+goo_api=google_ai_studio_api
 
 
 # Function to encode the image

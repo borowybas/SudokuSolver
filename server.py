@@ -116,4 +116,3 @@ if __name__ == "__main__":
 #         temp=f"{weather_data['main']['temp']:.1f}",
 #         feels_like=f"{weather_data['main']['feels_like']:.1f}"
 #     )
-
