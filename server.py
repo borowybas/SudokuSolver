@@ -6,6 +6,7 @@ from openaiSudoku import loadSudokuDataFromFile
 from sudoku import solveSudoku
 from waitress import serve
 import os
+import copy
 
 
 app = Flask(__name__)
@@ -139,7 +140,7 @@ def solve():
                     row.append(int(cell_value) if cell_value else 0) #if empty - make 0
                 sudoku_data.append(row)
 
-            solved_sudoku = sudoku_data
+            solved_sudoku = copy.deepcopy(sudoku_data)
             
             if solveSudoku(solved_sudoku):
                 conn = get_db_connection()

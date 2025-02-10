@@ -15,7 +15,7 @@
     {% else %}
     <p><a href="{{ url_for('login') }}"> Zaloguj się </a> | <a href="{{ url_for('register') }}"> Zarejestruj się </a></p>
     {% endif %}
-
+<!-- 
     <form action="">
         <table>
             <caption>Sudoku</caption>
@@ -25,7 +25,7 @@
                 <th>3 col</th>
             </tr>
         </table>
-    </form>
+    </form> -->
 
     <form id="sudoku-form" method="POST" action="/solve">
         <table>
@@ -33,7 +33,7 @@
 
              <!-- 1-st row -->
             <tr>
-                <td><input type="text" min="1" max="9" name="cell-0-0"></td>
+                <td><input type="number" min="1" max="9" name="cell-0-0"></td>
                 <td><input type="number" min="1" max="9" name="cell-0-1"></td>
                 <td><input type="number" min="1" max="9" name="cell-0-2"></td>
                 <td><input type="number" min="1" max="9" name="cell-0-3"></td>
@@ -172,6 +172,7 @@
     <div class="button-container">
         <!-- Formularz do przesyłania obrazu -->
         <form enctype="multipart/form-data" id="sudoku-form" method="POST" action="/solve">
+            Załaduj sudoku: 
             <input type="file" name="sudoku_image" accept="image/*" required>
             <button type="submit">Rozwiąż obrazek Sudoku</button>
         </form>
@@ -181,7 +182,7 @@
         <h2>Załadowany obrazek</h2>
         <img src="{{ image_url }}" alt="Sudoku image" style="max-width: 100%; height: auto;">
         {% else %}
-        <h1>Image will be render here...</h1>
+        <!-- <h1>Image will be rendered here...</h1> -->
     {% endif %}
 
 
