@@ -170,14 +170,31 @@ def history():
     conn = get_db_connection()
     cursor = conn.cursor()
 
-    # Get history for logged user
-    cursor.execute('''
-            SELECT * FROM sudoku_history
-                   WHERE user_id = ?
-                   ORDER BY timestamp DESC
-    ''', (session['user_id'],))
-    history = cursor.fetchall()
-    conn.close()
+    try:
+        # Get history for logged user
+        cursor.execute('''
+                SELECT * FROM sudoku_history
+                    WHERE user_id = ?
+                    ORDER BY timestamp DESC
+        ''', (session['user_id'],))
+        rows = cursor.fetchall()
+
+        history = []
+        for row in rows:
+            entry = dict(row)  # Konwersja sqlite3.Row na zwykły słownik
+            entry['sudoku_data'] = eval(entry['sudoku_data'])  # Zamiana stringa na listę
+            entry['solved_data'] = eval(entry['solved_data'])  # Zamiana stringa na listę
+            history.append(entry)  # Dodanie przekształconego rekordu do listy
+
+
+    except Exception as e:
+        print(f"Błąd: {e}")
+        history = []
+    finally:
+        conn.close()
+
+    
+    # conn.close()
 
     return render_template('history.html', history=history, username=session['username'])
 

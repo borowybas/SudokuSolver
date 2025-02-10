@@ -4,13 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Historia rozwiązań</title>
+    <link href="{{ url_for('static', filename='styles/index.css')}}" rel="stylesheet"/>
 </head>
 <body>
     <h1>Historia rozwiązań</h1>
     <p>Witaj, {{ username }}!</p>
     <a href="{{ url_for('index') }}">Powrót do strony głównej</a>
     <br><br>
-    <table border="1">
+
+    {% if history %}
+    {% for entry in history %}
+        <h2>Data: {{ entry['timestamp'] }}</h2>
+
+        <h3>Sudoku:</h3>
+        <table>
+            {% for row in entry['sudoku_data'] %}
+                <tr>
+                    {% for cell in row %}
+                        <td>{{ cell }}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </table>
+
+        <h3>Rozwiązanie:</h3>
+        <table>
+            {% for row in entry['solved_data'] %}
+                <tr>
+                    {% for cell in row %}
+                        <td>{{ cell }}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </table>
+
+        <hr>
+    {% endfor %}
+{% else %}
+    <p>Brak historii rozwiązań.</p>
+{% endif %}
+    
+    <!-- <table border="1">
         <tr>
             <th>Data</th>
             <th>Sudoku</th>
@@ -19,10 +53,26 @@
         {% for entry in history %}
         <tr>
             <td>{{ entry['timestamp'] }}</td>
-            <td><pre>{{ entry['sudoku_data'] }}</pre></td>
+            <td> -->
+                <!-- <pre> -->
+                <!-- {% if sudoku %} -->
+                <!-- <h2>Rozwiązane Sudoku:</h2> -->
+                <!-- <table>
+                    {% for row in entry['sudoku_data'] %}
+                        <tr>
+                            {% for cell in row %}
+                                <td>{{ cell }}</td>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                </table> -->
+                <!-- {% endif %} -->
+                <!-- {{ entry['sudoku_data'] }} -->
+            <!-- </pre> -->
+        <!-- </td>
             <td><pre>{{ entry['solved_data'] }}</pre></td>
         </tr>
         {% endfor %}
-    </table>
+    </table> -->
 </body>
 </html>
